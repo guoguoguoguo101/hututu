@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.project.shop.dao.GoodinfoMapper">
+  <resultMap id="BaseResultMap" type="com.project.shop.pojo.Goodinfo">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="kindid" jdbcType="INTEGER" property="kindid" />
+    <result column="img" jdbcType="VARCHAR" property="img" />
+    <result column="price" jdbcType="INTEGER" property="price" />
+    <result column="count" jdbcType="INTEGER" property="count" />
+    <result column="flag" jdbcType="INTEGER" property="flag" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, kindid, img, price, count, flag
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from goodinfo
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from goodinfo
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.project.shop.pojo.Goodinfo">
+    insert into goodinfo (id, kindid, img, 
+      price, count, flag)
+    values (#{id,jdbcType=INTEGER}, #{kindid,jdbcType=INTEGER}, #{img,jdbcType=VARCHAR}, 
+      #{price,jdbcType=INTEGER}, #{count,jdbcType=INTEGER}, #{flag,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.project.shop.pojo.Goodinfo">
+    insert into goodinfo
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="kindid != null">
+        kindid,
+      </if>
+      <if test="img != null">
+        img,
+      </if>
+      <if test="price != null">
+        price,
+      </if>
+      <if test="count != null">
+        count,
+      </if>
+      <if test="flag != null">
+        flag,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="kindid != null">
+        #{kindid,jdbcType=INTEGER},
+      </if>
+      <if test="img != null">
+        #{img,jdbcType=VARCHAR},
+      </if>
+      <if test="price != null">
+        #{price,jdbcType=INTEGER},
+      </if>
+      <if test="count != null">
+        #{count,jdbcType=INTEGER},
+      </if>
+      <if test="flag != null">
+        #{flag,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.project.shop.pojo.Goodinfo">
+    update goodinfo
+    <set>
+      <if test="kindid != null">
+        kindid = #{kindid,jdbcType=INTEGER},
+      </if>
+      <if test="img != null">
+        img = #{img,jdbcType=VARCHAR},
+      </if>
+      <if test="price != null">
+        price = #{price,jdbcType=INTEGER},
+      </if>
+      <if test="count != null">
+        count = #{count,jdbcType=INTEGER},
+      </if>
+      <if test="flag != null">
+        flag = #{flag,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.project.shop.pojo.Goodinfo">
+    update goodinfo
+    set kindid = #{kindid,jdbcType=INTEGER},
+      img = #{img,jdbcType=VARCHAR},
+      price = #{price,jdbcType=INTEGER},
+      count = #{count,jdbcType=INTEGER},
+      flag = #{flag,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

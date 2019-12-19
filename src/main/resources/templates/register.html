@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>register</title>
+    <link rel="stylesheet" th:href="@{/css/auth.css}">
+    <script th:src="@{/js/jquery.min.js}"></script>
+    <link rel="stylesheet" type="text/css" href="../../static/css/fzwmodal.css"
+          th:href="@{/css/fzwmodal.css}">
+    <script th:src="@{/js/fzwmodal.js}" src="../../static/js/fzwmodal.js"></script>
+</head>
+<body>
+<div class="lowin">
+    <div class="lowin-brand">
+        <img th:src="@{/img/kodinger.jpg}" alt="logo">
+    </div>
+    <div class="lowin-wrapper">
+        <div class="lowin-box lowin-register">
+            <div class="lowin-box-inner">
+                <p>go shopping</p>
+                <div class="lowin-group">
+                    <label>用户名</label>
+                    <input type="text" id="userName" autocomplete="name" class="lowin-input">
+                </div>
+                <div class="lowin-group">
+                    <label>密码</label>
+                    <input type="password" id="password1" class="lowin-input">
+                </div>
+                <div class="lowin-group">
+                    <label>再次</label>
+                    <input type="password" id="password2"  class="lowin-input"
+                           placeholder="确认密码">
+                </div>
+                <button class="lowin-btn" onclick="register()">
+                    注册
+                </button>
+                <div class="text-foot">
+                    已有账号? <a th:href="@{/login}" class="login-link">去登陆</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="lowin-footer">
+        <a href="http://www.cssmoban.com/" target="_blank" title="模板之家"></a>
+        <a href="http://www.cssmoban.com/" title="网页模板" target="_blank"></a>
+    </footer>
+</div>
+
+<!--模态框组件-->
+<div id="block" class="modal"></div>
+<div id="dialog" class="modal">
+    <div id="dialog_message"></div>
+    <button onclick="turnTo()">确认</button>
+</div>
+<!-- !! -->
+<script>
+    function register() {
+        var username = $("#userName").val();
+        var password1 = $("#password1").val();
+        var password2 = $("#password2").val();
+        $.ajax({
+            url: "/shop/register0",
+            type: "post",
+            data: {
+                "userName": username,
+                "password1": password1,
+                "password2": password2
+            },
+            dataType: "json",
+            success: function (mes) {
+                if (mes.code == 0) {
+                    openDialog(mes.message, "login", true);
+                } else {
+                    openDialog(mes.message, "", false);
+                }
+            }
+        })
+    }
+</script>
+</body>
+</html>

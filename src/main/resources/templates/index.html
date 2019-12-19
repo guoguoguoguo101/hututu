@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script th:src="@{/js/jquery.1.9.1.js}"></script>
+</head>
+
+<style>
+    body{
+        font-size: 70px;
+        background-color: aqua;
+        background-image:url("/shop/img/background/tutu0.jpg");
+
+    }
+
+    .songshu{
+        float: left;
+        width: 50%;
+    }
+    div{
+        float: left;
+    }
+    .inside{
+        font-size: 50px;
+        background-color: powderblue;
+        width: 500px;
+        height: 400px;
+        margin-top: 20px;
+        margin-left: 20px;
+        margin-right: 20px;
+        left: 500px;
+        border:10px solid lightgoldenrodyellow;
+        border-radius: 10px;
+        box-shadow: 0 0 10px #fbfbfb;
+    }
+
+
+    ul {list-style:none;margin:0px;font-size: 50px;color: white}
+    li {
+  color: snow;
+        list-style: none;
+        margin: 0px;
+        list-style-image: url(/shop/img/shop3.png)
+    }
+    a:link {
+        color: snow;
+        text-decoration: none;
+
+    }
+    a:visited {
+        color: snow;
+        text-decoration: none;
+    }
+    a:hover {
+        color: powderblue;
+
+    }
+
+
+
+    
+
+</style>
+<body>
+
+<div style="position:absolute;left: 20%;top: 5%">
+        <div th:each="kind:${goodlist}"  class="inside">
+
+
+            <a th:href="@{'/index/'+${kind.goodkind}+'/1'}">
+   <div style=" margin-left: 5%"><img th:src="'/shop/img/'+${kind.goodkind}+${kind.img}" height="300" width="300"  style="margin: 0 auto;" ></div>
+            </a>
+                <div th:text="${kind.goodkind}" style="width: 150px;text-align: center;margin-top: 50px;font-size: 45px"></div>
+
+
+            <div th:text="${kind.detail}" style="text-align: center;width: 520px;color: white;font-size: 55px;font-family: Arial;"></div>
+    </div>
+
+
+</div>
+
+<div style="position: absolute;left: 1500px;top: 600px;width: 300px;height: 320px;border: white 5px solid">
+
+    <ul>
+
+        <li><a href="/shop/mine">我的信息</a> </li>
+        <li><a href="/shop/cart">购物车</a> </li>
+        <li><a href="/shop/order">我的订单</a> </li>
+        <li><a href="/shop/index">返回首页</a> </li>
+    </ul>
+</div>
+
+
+<!--<div>-->
+<!--<img src="/shop/img/shark.png">-->
+<!--</div>-->
+
+
+<!--<div class="songshu"><img src="/shop/img/songshu1.png"></div>-->
+<!--<div class="songshu"><img src="/shop/img/songshu2.jpg"></div>-->
+<!--<div class="songshu"><img src="/shop/img/songshu3.jpg"></div>-->
+<!--<div class="songshu"><img src="/shop/img/songshu4.jpg"></div>-->
+
+<!--<div style="position: absolute;bottom: 0%">-->
+<!--<ul>-->
+    <!--<li><a href="./index"><img src="/shop/img/index.png"></a> </li>-->
+    <!--<li><a href="./detail"><img src="/shop/img/show.png"></a> </li>-->
+    <!--<li><a href="./cart"><img src="/shop/img/cart.png"></a> </li>-->
+    <!--<li><a href="./mine"><img src="/shop/img/mine.png"></a> </li>-->
+<!--</ul>-->
+<!--</div>-->
+
+
+
+</body>
+</html>

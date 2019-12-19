@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:width="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script th:src="@{/js/jquery.1.9.1.js}"></script>
+</head>
+
+<style>
+    body{
+        font-size: 50px;
+        background-color: aqua;
+        background-image:url("/shop/img/background/tutu5.jpg");
+    }
+
+    .songshu{
+        float: left;
+        width: 50%;
+    }
+    div{
+        float: left;
+    }
+    .inside{
+        width: 1200px;
+        height: 150px;
+        margin-top: 20px;
+        text-align: center;
+
+        left: 500px;
+        border:10px solid lightgoldenrodyellow;
+        border-radius: 10px;
+        box-shadow: 0 0 10px #fbfbfb;
+    }
+
+    .word{
+        line-height: 150px;
+        color: slateblue;
+    }
+
+
+    ul {list-style:none;margin:0px;font-size: 50px;color: white}
+    li {
+        color: snow;
+        list-style: none;
+        margin: 0px;
+        list-style-image: url(/shop/img/shop3.png)
+    }
+    a:link {
+        color: snow;
+        text-decoration: none;
+
+    }
+    a:visited {
+        color: snow;
+        text-decoration: none;
+    }
+    a:hover {
+        color: powderblue;
+
+    }
+
+
+</style>
+<body>
+
+
+
+<div class="insert" style="position: absolute;left: 17%;top: 5%;font-size: 40px;width: 2000px">
+    <table >
+        <tr >
+            <td style="width: 300px;color: white">商品名称</td><td style="width: 150px;color: white">类别</td><td style="width: 100px;color: white">数量</td><td style="width:250px;color: white">交易时间</td><td style="width: 200px;color: white">价格</td>
+        </tr>
+    </table>
+</div>
+
+<div style="position:absolute;left: 15%;top: 10%">
+
+    <div th:each="c:${myorder}" style="background-color: #e0fff2c9" class="inside">
+        <!--<div th:text="${c.id}" style="line-height: 150px"></div>-->
+        <div style=" width: 100px;line-height: 180px"><img th:src="'/shop/img/'+${c.goodkind}+${c.img}" height="70" width="70"  style="margin: 0 auto;" ></div>
+        <a th:href="@{'/show/'+${c.goodkind}+'/1'}">
+            <div th:text="${c.name}" class="word" style="width: 200px"></div>
+        </a>
+        <div th:text="${c.goodkind}" class="word" style="width: 170px"></div>
+
+        <!--<div style=" width: 80px;line-height: 180px;margin-left: 80px"><img th:src="'/shop/img/jianhao.png'" height="60" width="60"  style="margin: 0 auto;" th:onclick="cart(-1,[[${c.goodid}]])" ></div>-->
+        <div th:id="${c.goodid}" th:text="${c.count}" class="word" style="width: 100px"></div>
+
+        <div th:text="${c.time}" class="word" style="width: 170px;margin-left: 20px;font-size: 40px"></div>
+        <div th:text="${c.price}+'元'" class="word" style="width: 170px;margin-left: 100px"></div>
+        <div style=" width: 80px;line-height: 180px"><img th:src="'/shop/img/delete.png'" height="70" width="70"  style="margin: 0 auto;"  th:onclick="delete0([[${c.id}]])"></div>
+        <!--<img th:src="'/shop/img/milk'+${c.img}" >-->
+
+    </div>
+</div>
+
+<div style="position: absolute;left: 1500px;top: 600px;width: 300px;height: 320px;border: white 5px solid">
+
+    <ul>
+
+        <li><a href="/shop/mine">我的信息</a> </li>
+        <li><a href="/shop/cart">购物车</a> </li>
+        <li><a href="/shop/order">我的订单</a> </li>
+        <li><a href="/shop/index">返回首页</a> </li>
+    </ul>
+</div>
+
+<!--<div style="position: absolute;left: 1550px;top: 150px;background-color: lightskyblue;border: white 2px solid ;border-radius:2px">-->
+    <!--<img th:onclick="checkout() " align="center" src="/shop/img/pencil.png" height="60" width="60"  style="margin: 0 auto;"> 结账</div>-->
+<!--<div th:id="woqu">6</div>-->
+<script>
+
+function cloes(num){
+    alert(num);
+}
+function delete0(num2){
+    var id = num2;
+    $.ajax({
+        url: "/shop/cart/deleteorder",
+        type: "post",
+        async: false,
+        data: {
+            "orderid": id
+        },
+        dataType: "json",
+        success: function (mes) {
+            // alert("删除成功")
+            window.location.reload();
+
+        }
+    })
+}
+
+
+
+</script>
+
+
+
+
+
+
+</body>

@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:width="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script th:src="@{/js/jquery.1.9.1.js}"></script>
+    <link rel="stylesheet" type="text/css" href="../../static/css/changeinfo.css"
+          th:href="@{/css/changeinfo.css}">
+
+    <script th:src="@{/js/changeinfo.js}" src="../../static/js/changeinfo.js"></script>
+</head>
+
+<style>
+    body{
+        font-size: 50px;
+        background-color: aqua;
+        background-image:url("/shop/img/background/tutu3.jpg");
+    }
+    li{
+        margin-left: 2%;
+        width: 22%;
+        float: left;
+
+    }
+    .songshu{
+        float: left;
+        width: 50%;
+    }
+    div{
+        float: left;
+    }
+    .inside{
+        width: 1200px;
+        height: 150px;
+        margin-top: 20px;
+text-align: center;
+
+        left: 500px;
+        border:10px solid lightgoldenrodyellow;
+        border-radius: 10px;
+        box-shadow: 0 0 10px #fbfbfb;
+    }
+
+    .inside1{
+        font-size: 40px;
+        width: 800px;
+        height: 70px;
+        margin-top: 10px;
+        text-align: center;
+
+        left: 200px;
+        border:10px solid lightgoldenrodyellow;
+        border-radius: 10px;
+        box-shadow: 0 0 10px #fbfbfb;
+    }
+
+    .word{
+        line-height: 150px;
+        color: slateblue;
+    }
+
+    .word1{
+        line-height: 70px;
+        color: slateblue;
+    }
+
+
+</style>
+<body>
+
+
+
+<div class="insert" style="position: absolute;left: 17%;top: 5%;font-size: 40px;width: 2000px">
+    <table >
+    <tr >
+         <td style="width: 300px">商品名称</td><td style="width: 300px">类别</td><td style="width: 300px">数量</td><td style="width:100px;">单价</td>
+    </tr>
+    </table>
+</div>
+
+<div style="position:absolute;left: 15%;top: 10%">
+
+<div th:each="c:${mycart}" style="background-color: lightcyan" class="inside">
+    <!--<div th:text="${c.id}" style="line-height: 150px"></div>-->
+    <div style=" width: 100px;line-height: 180px"><img th:src="'/shop/img/'+${c.goodkind}+${c.img}" height="70" width="70"  style="margin: 0 auto;" ></div>
+    <a th:href="@{'/show/'+${c.goodkind}+'/1'}">
+        <div th:text="${c.name}" class="word" style="width: 200px"></div>
+    </a>
+   <div th:text="${c.goodkind}" class="word" style="width: 170px"></div>
+
+     <div style=" width: 80px;line-height: 180px;margin-left: 80px"><img th:src="'/shop/img/jianhao.png'" height="60" width="60"  style="margin: 0 auto;" th:onclick="cart(-1,[[${c.goodid}]])" ></div>
+    <div th:id="${c.goodid}" th:text="${c.goodcount}" class="word" style="width: 100px"></div>
+    <div style=" width: 80px;line-height: 180px"><img th:src="'/shop/img/jiahao.png'" height="70" width="70"  style="margin: 0 auto;"  th:onclick="cart(1,[[${c.goodid}]])"></div>
+    <div th:text="${c.price}+'元'" class="word" style="width: 170px;margin-left: 100px"></div>
+    <!--<img th:src="'/shop/img/milk'+${c.img}" >-->
+
+</div>
+</div>
+
+<div style="position: absolute;left: 1550px;top: 150px;background-color: lightskyblue;border: white 2px solid ;border-radius:2px">
+    <img th:onclick="openDialog() " align="center" src="/shop/img/pencil.png" height="60" width="60"  style="margin: 0 auto;"> 结账</div>
+
+<div style="position: absolute;left: 1550px;top: 270px;background-color: lightskyblue;border: white 2px solid ;border-radius:2px"><a href="/shop/index"> <img  align="center" src="/shop/img/pencil.png" height="60" width="60"  style="margin: 0 auto;"></a>返回首页</div>
+<div style="position: absolute;left: 1550px;top: 360px;background-color: lightskyblue;border: white 2px solid ;border-radius:2px"><a href="/shop/mine"> <img  align="center" src="/shop/img/pencil.png" height="60" width="60"  style="margin: 0 auto;"></a>我的信息</div>
+<div style="position: absolute;left: 1550px;top: 450px;background-color: lightskyblue;border: white 2px solid ;border-radius:2px"><a href="/shop/order"> <img  align="center" src="/shop/img/pencil.png" height="60" width="60"  style="margin: 0 auto;"></a>我的订单</div>
+
+
+
+
+
+
+<div id="blackback" class="momo"></div>
+<div id="box1" class="momo">
+    <div class="my1" style=" margin-top: 10px;margin-left: 40px;" >
+        <div th:each="c:${mycart}" style="background-color: lightcyan" class="inside1">
+            <!--<div th:text="${c.id}" style="line-height: 150px"></div>-->
+            <div style=" width: 100px;line-height: 100px"><img th:src="'/shop/img/'+${c.goodkind}+${c.img}" height="70" width="70"  style="margin: 0 auto;" ></div>
+            <a th:href="@{'/show/'+${c.goodkind}+'/1'}">
+                <div th:text="${c.name}" class="word1" style="width: 200px"></div>
+            </a>
+            <div th:id="${c.goodid}" th:text="'×'+${c.goodcount}" class="word1" style="width: 100px"></div>
+
+            <!--<img th:src="'/shop/img/milk'+${c.img}" >-->
+            <div th:text="${c.price}+'元'" class="word1" style="width: 100px;margin-left: 100px"></div>
+            <div th:text="${c.price}*${c.goodcount}+'元'" class="word1" style="width: 100px;margin-left: 100px"></div>
+        </div>
+    </div>
+    <div style="background-color: lightcyan;margin-left: 40px;margin-top:30px;text-align: right" class="inside1">
+        <div style="width: 500px">合计:</div><div th:text="${allmoney}+'元'"></div>
+    </div>
+
+    <div onclick="closeback()" style="width: 447px;height: 100px;border: #fbfbfb 2px solid;border-radius: 2px;position: absolute;top: 700px;left: 0px "> 返回 </div><div onclick="checkout()" style="width: 445px;height: 100px;border: #fbfbfb 2px solid;border-radius: 2px;position: absolute;top: 700px;left: 450px ">确认支付 </div>
+</div>
+
+
+
+
+
+<script>
+    function closeback() {
+
+        document.getElementById('blackback').style.display='none';
+        document.getElementById('box1').style.display='none'
+
+    }
+    function checkout() {
+        $.ajax({
+            url: "/shop/cart/checkout",
+            type: "post",
+            async: false,
+            data: {
+
+            },
+            dataType: "json",
+            success: function (mes) {
+                alert(mes.message)
+           if(mes.code == 0){
+               window.location.href="/shop/order"
+           }else {
+               window.location.reload();
+           }
+
+
+            }
+        })
+    }
+
+
+    function openDialog2(message, url, if_turn) {
+        $("#dialog_message").html(message);
+        dialog_url = url;
+        is_turn_need = if_turn;
+        $("#block").css("display", "block");
+        $("#dialog").css("display", "block");
+    }
+
+    function cart(num1,num2) {
+        // alert(num1);
+        // alert(num2);
+
+            var count =parseInt( $("#"+num2+"").html());
+            var c1 = count+parseInt(num1)
+            $("#"+num2+"").html(c1);
+
+        $.ajax({
+            url: "/shop/cart/addcart",
+            type: "post",
+            async: false,
+            data: {
+                "ifadd": num1,
+                "goodid": num2
+            },
+            dataType: "json",
+            success: function (mes) {
+                // alert("添加成功")
+                // alert("开始判断是不是为0");
+                var c1 = count+parseInt(num1);
+                // alert(c1);
+                if (c1==0){
+                    // alert("准备删除")
+                 delect(num2);
+
+                }
+
+            }
+        })
+    }
+
+    function delect(num2) {
+        $.ajax({
+            url: "/shop/cart/deletecart",
+            type: "post",
+            async: false,
+            data: {
+                "goodid": num2
+            },
+            dataType: "json",
+            success: function (mes) {
+                // alert("删除成功")
+                window.location.reload();
+
+            }
+        })
+
+    }
+</script>
+
+
+
+
+<!--<div>-->
+<!--<img src="/shop/img/shark.png">-->
+<!--</div>-->
+
+
+<!--<div class="songshu"><img src="/shop/img/songshu1.png"></div>-->
+<!--<div class="songshu"><img src="/shop/img/songshu2.jpg"></div>-->
+<!--<div class="songshu"><img src="/shop/img/songshu3.jpg"></div>-->
+<!--<div class="songshu"><img src="/shop/img/songshu4.jpg"></div>-->
+
+<!--<div style="position: absolute;bottom: 0%">-->
+<!--<ul>-->
+<!--<li><a href="./index"><img src="/shop/img/index.png"></a> </li>-->
+<!--<li><a href="./detail"><img src="/shop/img/show.png"></a> </li>-->
+<!--<li><a href="./cart"><img src="/shop/img/cart.png"></a> </li>-->
+<!--<li><a href="./mine"><img src="/shop/img/mine.png"></a> </li>-->
+<!--</ul>-->
+<!--</div>-->
+
+
+
+</body>
+</html>

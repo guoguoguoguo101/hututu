@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script th:src="@{/js/jquery.1.9.1.js}"></script>
+</head>
+
+<style>
+    body{
+        font-size: 70px;
+        background-color: aqua;
+        background-image:url("/shop/img/background/tutu2.jpg");
+    }
+    li{
+        margin-left: 2%;
+        width: 22%;
+        float: left;
+
+    }
+    .songshu{
+        float: left;
+        width: 50%;
+    }
+    div{
+        float: left;
+    }
+    .inside{
+        width: 1000px;
+        height: 800px;
+        margin-top: 20px;
+        margin-left: 20px;
+        margin-right: 20px;
+        left: 500px;
+        border:10px solid lightgoldenrodyellow;
+        border-radius: 10px;
+        box-shadow: 0 0 10px #fbfbfb;
+        top: 15%;
+    }
+    .word0{
+        width: 350px;
+       margin-left: 30px;
+        height: 130px;
+
+    }
+
+</style>
+<body>
+<div style="font-size: 50px;position: absolute;left: 11%;top: 4%">
+    <a href="/shop/index"> <div> 回到首页>>></div></a>
+
+    <a th:href="'/shop/index/'+${kind}+'/1'"><div th:text="${kind}+'>>>'"></div></a>
+
+</div>
+
+
+<div class="inside" style="background-color: lightgoldenrodyellow;position:absolute;top: 10%;left: 10%;color: cornflowerblue">
+    <div style="background-color: aliceblue" ><img th:src="'/shop/img/'+${kind}+${good.img}" height="600" width="600"  style="margin: 0 auto;" ></div>------->
+
+    <div th:text="${good.name}" class="word0"></div>
+    <div th:text="${good.price}+'元'" class="word0"></div>
+    <div th:text="'库存:'+${good.count}" class="word0"></div>
+
+
+    <div style="margin-left: 100px">
+    <img src="/shop/img/jiahao.png" height="110"width="110" th:onclick="cart(1,[[${good.id}]])" >
+    </div>
+    <div th:text="${good.detail}"></div>
+
+</div>
+
+
+
+
+
+<!--<div style="position:absolute;left: 20%;top: 5%" class="inside">-->
+
+
+
+
+            <!--<div style=" margin-left: 5%"><img th:src="'/shop/img/'+${kind}+${good.img}" height="300" width="300"  style="margin: 0 auto;" ></div>-->
+
+        <!--<div th:text="${kind}" style="width: 150px;text-align: center;margin-top: 50px;font-size: 45px"></div>-->
+    <!--<div th:text="${good.price}"></div>-->
+    <!--<div th:text="${good.count}"></div>-->
+    <!--<div th:text="${good.name}"></div>-->
+        <!--<div th:text="${kind.detail}" style="text-align: center;width: 520px;color: white;font-size: 55px;font-family: Arial;"></div>-->
+    <!--</div>-->
+
+
+<!--</div>-->
+
+
+
+
+<!--<div>-->
+<!--<img src="/shop/img/shark.png">-->
+<!--</div>-->
+
+
+<!--<div class="songshu"><img src="/shop/img/songshu1.png"></div>-->
+<!--<div class="songshu"><img src="/shop/img/songshu2.jpg"></div>-->
+<!--<div class="songshu"><img src="/shop/img/songshu3.jpg"></div>-->
+<!--<div class="songshu"><img src="/shop/img/songshu4.jpg"></div>-->
+
+<!--<div style="position: absolute;bottom: 0%">-->
+<!--<ul>-->
+<!--<li><a href="./index"><img src="/shop/img/index.png"></a> </li>-->
+<!--<li><a href="./detail"><img src="/shop/img/show.png"></a> </li>-->
+<!--<li><a href="./cart"><img src="/shop/img/cart.png"></a> </li>-->
+<!--<li><a href="./mine"><img src="/shop/img/mine.png"></a> </li>-->
+<!--</ul>-->
+<!--</div>-->
+
+
+
+</body>
+
+<script>
+    function cart(num1,num2) {
+    
+        $.ajax({
+            url: "/shop/cart/addcart",
+            type: "post",
+            async: false,
+            data: {
+                "ifadd": num1,
+                "goodid": num2
+            },
+            dataType: "json",
+            success: function (mes) {
+                alert("添加成功")
+
+            }
+        })
+    }
+</script>
+
+</html>

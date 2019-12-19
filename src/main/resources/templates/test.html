@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+    <title>Untitled Document</title>
+    <script type="text/javascript">
+        function crp(){
+            var img=new Image();
+            img.src="/shop/img/shop1.png";
+            document.getElementById("im").src=img.src;
+            document.getElementById("im").onmousedown=function(){
+                alert('onmousedown');
+            }
+        }
+
+
+
+
+            document.onmousedown=function(ev){
+                var oEvent=ev||event;
+                var oDiv=document.createElement('div');
+                oDiv.style.left=oEvent.clientX+'px';  // 指定创建的DIV在文档中距离左侧的位置
+                oDiv.style.top=oEvent.clientY+'px';  // 指定创建的DIV在文档中距离顶部的位置
+                oDiv.style.border='1px solid #FF0000'; // 设置边框
+                oDiv.style.position='absolute'; // 为新创建的DIV指定绝对定位
+                oDiv.style.width='200px'; // 指定宽度
+                oDiv.style.height='200px'; // 指定高度
+                document.body.appendChild(oDiv);
+
+
+
+        }
+    </script>
+</head>
+<body onload="javascript:crp()">
+<img src="/shop/img/shark.png" name="im" id="im"/>
+
+<div onclick="tishikuang()"> 555</div>
+</body>
+</html>
+
+</body>
+</html>
